@@ -28,8 +28,8 @@ namespace DeltaGearApp
             
             _viewCreator.Button.Click += (sender, e) =>
             {
-                Toast.MakeText(this, "メッセージ", ToastLength.Short).Show();
-                _deltaSoundPlayer.PlaySound();
+                Toast.MakeText(this, "Standing by", ToastLength.Short).Show();
+                _deltaSoundPlayer.PlaySound(0);
             };
         }
 
@@ -69,9 +69,8 @@ namespace DeltaGearApp
                 return;
             }
 
-            //成功！と表示してみる
-            Toast.MakeText(this, "Success！", ToastLength.Short).Show();
-            _deltaSoundPlayer.PlaySound();
+            Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+            _deltaSoundPlayer.PlaySound(2);
         }
     }
 }

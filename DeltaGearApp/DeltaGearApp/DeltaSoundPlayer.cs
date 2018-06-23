@@ -16,18 +16,30 @@ namespace DeltaGearApp
 {
     class DeltaSoundPlayer
     {
+        public enum SoundIdNum
+        {
+            Standingby,
+            Waiting,
+            Complete,
+            Max
+        };
         private SoundPool _soundPool;
-        private int _soundId;
+        private int[] soundIds = new int[3];
 
         public DeltaSoundPlayer()
         {
             _soundPool = new SoundPool(1, Stream.Music, 0);
-            _soundId = _soundPool.Load(Application.Context, Resource.Raw.test_sound, 0);
+            soundIds[0] = _soundPool.Load(Application.Context, Resource.Raw.delta_clicked_to_standing_by, 0);
+            soundIds[1] = _soundPool.Load(Application.Context, Resource.Raw.delta_waiting, 0);
+            soundIds[2] = _soundPool.Load(Application.Context, Resource.Raw.delta_complete, 0);
         }
 
-        public void PlaySound()
+        public void PlaySound(int num)
         {
-            _soundPool.Play(_soundId, 1.0f, 1.0f, 1, 0, 1.0f);
+            if(num >= 0 &&  num < 3)
+            {
+                _soundPool.Play(soundIds[num], 1.0f, 1.0f, 1, 0, 1.0f);
+            }
         }
 
         public void Destroy()

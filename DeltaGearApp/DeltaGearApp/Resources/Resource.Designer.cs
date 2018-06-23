@@ -3124,7 +3124,22 @@ namespace DeltaGearApp
 		{
 			
 			// aapt resource value: 0x7f070000
-			public const int test_sound = 2131165184;
+			public const int delta_clicked = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int delta_clicked_to_standing_by = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int delta_complete = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int delta_standing_by = 2131165187;
+			
+			// aapt resource value: 0x7f070004
+			public const int delta_waiting = 2131165188;
+			
+			// aapt resource value: 0x7f070005
+			public const int test_sound = 2131165189;
 			
 			static Raw()
 			{
