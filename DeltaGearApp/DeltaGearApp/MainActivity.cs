@@ -6,6 +6,8 @@ using Android.Content;
 using System;
 using Android.Text;
 using Android.Nfc;
+using Android.Speech.Tts;
+using Android.Speech;
 
 namespace DeltaGearApp
 {
@@ -31,6 +33,16 @@ namespace DeltaGearApp
                 Toast.MakeText(this, "Standing by", ToastLength.Short).Show();
                 _deltaSoundPlayer.PlaySound(0);
             };
+
+            Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
+           // intent.PutExtra(RecognizerIntent.ExtraPrompt, Application.Context.GetString(Resource.String.messageSpeakNow));
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+            intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+
+            intent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
+            StartActivityForResult(intent, 10);
         }
 
         protected override void OnResume()
@@ -71,6 +83,27 @@ namespace DeltaGearApp
 
             Toast.MakeText(this, "Complete", ToastLength.Short).Show();
             _deltaSoundPlayer.PlaySound(2);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
+        {
+            if (requestCode == 10)
+            {
+                if (resultVal == Result.Ok)
+                {
+                    var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
+                    if (matches.Count != 0)
+                    {
+                        Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+                    }
+                }
+            }
+
+            base.OnActivityResult(requestCode, resultVal, data);
         }
     }
 }
