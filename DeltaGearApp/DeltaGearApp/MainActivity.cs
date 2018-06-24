@@ -94,11 +94,13 @@ namespace DeltaGearApp
                     var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
                     if (matches.Count != 0)
                     {
-                        Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+                        string textInput = matches[0];
+                        Toast.MakeText(this, "Complete" + textInput, ToastLength.Short).Show();
                     }
                     else
                     {
-                        Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+                        string textInput = matches[0];
+                        Toast.MakeText(this, "Complete" + textInput, ToastLength.Short).Show();
                     }
                 }
             }
