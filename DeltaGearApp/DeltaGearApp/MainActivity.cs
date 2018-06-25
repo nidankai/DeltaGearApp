@@ -35,10 +35,10 @@ namespace DeltaGearApp
             };
 
             Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-           // intent.PutExtra(RecognizerIntent.ExtraPrompt, Application.Context.GetString(Resource.String.messageSpeakNow));
-            intent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 1500);
-            intent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 1500);
-            intent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 15000);
+            intent.PutExtra(RecognizerIntent.ExtraPrompt, " ");
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 100); // 入力完了とみなすまでの時間
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 100); // 入力後に待つ時間
+            intent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 10000); // 入力の最小時間
             intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
 
             intent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
