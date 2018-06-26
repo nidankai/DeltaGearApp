@@ -24,7 +24,6 @@ namespace DeltaGearApp
 
             _viewCreator = new ViewCreator();
             SetContentView(_viewCreator.Layout);
-
             _nfcReader = new NfcReader();
             _deltaSoundPlayer = new DeltaSoundPlayer();
             
@@ -39,7 +38,7 @@ namespace DeltaGearApp
             intent.PutExtra(RecognizerIntent.ExtraSpeechInputCompleteSilenceLengthMillis, 100); // 入力完了とみなすまでの時間
             intent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 100); // 入力後に待つ時間
             intent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 10000); // 入力の最小時間
-            intent.PutExtra(RecognizerIntent.ExtraMaxResults, 1);
+            intent.PutExtra(RecognizerIntent.ExtraMaxResults, 5);
 
             intent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
             StartActivityForResult(intent, 10);
@@ -95,12 +94,21 @@ namespace DeltaGearApp
                     if (matches.Count != 0)
                     {
                         string textInput = matches[0];
-                        Toast.MakeText(this, "Complete" + textInput, ToastLength.Short).Show();
+                        foreach(var word in matches)
+                        {
+                            Console.WriteLine("繰り返し " + word);
+                            if (word == "返信")
+                            {
+                                Console.WriteLine("成功");
+                                Toast.MakeText(this, "Standing by " + textInput, ToastLength.Short).Show();
+                                _deltaSoundPlayer.PlaySoundStandingBy();
+                            }
+                        }
                     }
                     else
                     {
                         string textInput = matches[0];
-                        Toast.MakeText(this, "Complete" + textInput, ToastLength.Short).Show();
+                        Toast.MakeText(this, "Error ", ToastLength.Short).Show();
                     }
                 }
             }

@@ -42,6 +42,12 @@ namespace DeltaGearApp
             }
         }
 
+        public void PlaySoundStandingBy()
+        {
+            PlaySound(0);
+            PlaySound(1);
+        }
+
         public void Destroy()
         {
             _soundPool.Release();
