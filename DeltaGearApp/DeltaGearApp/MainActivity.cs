@@ -96,11 +96,9 @@ namespace DeltaGearApp
                         string textInput = matches[0];
                         foreach(var word in matches)
                         {
-                            Console.WriteLine("繰り返し " + word);
-                            if (word == "返信")
+                            if (word == "変身")
                             {
-                                Console.WriteLine("成功");
-                                Toast.MakeText(this, "Standing by " + textInput, ToastLength.Short).Show();
+                                Toast.MakeText(this, "Standing by " + word, ToastLength.Short).Show();
                                 _deltaSoundPlayer.PlaySoundStandingBy();
                             }
                         }
