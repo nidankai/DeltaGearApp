@@ -59,11 +59,11 @@ namespace DeltaGearApp
             }
         }
 
-        protected override void OnPause()
+        protected override void OnDestroy()
         {
-            base.OnPause();
+            base.OnDestroy();
 
-            //_deltaSoundPlayer.Destroy();
+           _deltaSoundPlayer.Destroy();
         }
 
         protected override void OnNewIntent(Intent intent)
@@ -93,7 +93,6 @@ namespace DeltaGearApp
                     var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
                     if (matches.Count != 0)
                     {
-                        string textInput = matches[0];
                         foreach(var word in matches)
                         {
                             if (word == "変身")
