@@ -17,6 +17,7 @@ namespace DeltaGearApp
         private NfcReader _nfcReader;
         private DeltaSoundPlayer _deltaSoundPlayer;
         private ViewCreator _viewCreator;
+        private bool voiceRecognitionFlg;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,6 +32,7 @@ namespace DeltaGearApp
             {
                 Toast.MakeText(this, "Standing by", ToastLength.Short).Show();
                 _deltaSoundPlayer.PlayRecognitionedSound();
+                voiceRecognitionFlg = true;
             };
 
             Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
@@ -58,6 +60,12 @@ namespace DeltaGearApp
             }
         }
 
+        protected override void OnPause()
+        {
+            base.OnPause();
+
+            _deltaSoundPlayer.StopAllSound();
+        }
         protected override void OnDestroy()
         {
             base.OnDestroy();
@@ -79,8 +87,12 @@ namespace DeltaGearApp
                 return;
             }
 
-            Toast.MakeText(this, "Complete", ToastLength.Short).Show();
-            _deltaSoundPlayer.PlayCompleteSound();
+            if (voiceRecognitionFlg)
+            {
+                Toast.MakeText(this, "Complete", ToastLength.Short).Show();
+                _deltaSoundPlayer.PlayCompleteSound();
+                voiceRecognitionFlg = false;
+            }
         }
 
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
@@ -98,6 +110,7 @@ namespace DeltaGearApp
                             {
                                 Toast.MakeText(this, "Standing by " + word, ToastLength.Short).Show();
                                 _deltaSoundPlayer.PlayRecognitionedSound();
+                                voiceRecognitionFlg = true;
                             }
                         }
                     }
