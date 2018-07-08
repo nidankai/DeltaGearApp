@@ -30,6 +30,13 @@ namespace DeltaGearApp
         private int _soundIdWaiting;
         private int _soundIdComplete;
 
+        private void StopAllSound()
+        {
+            _soundPoolStandingBy.Stop(_soundIdStandingBy);
+            _soundPoolWaiting.Stop(_soundIdWaiting);
+            _soundPoolComplete.Stop(_soundIdComplete);
+        }
+
         public DeltaSoundPlayer()
         {
             _soundPoolStandingBy = new SoundPool(1, Stream.Music, 0);
@@ -44,21 +51,21 @@ namespace DeltaGearApp
 
         public void PlayRecognitionedSound()
         {
+            StopAllSound();
             _soundPoolStandingBy.Play(_soundIdStandingBy, 1.0f, 1.0f, 1, 0, 1.0f);
             _soundPoolWaiting.Play(_soundIdWaiting, 1.0f, 1.0f, 1, -1, 1.0f);
         }
 
         public void PlayCompleteSound()
         {
+            StopAllSound();
             _soundPoolWaiting.Stop(_soundIdWaiting);
             _soundPoolComplete.Play(_soundIdComplete, 1.0f, 1.0f, 1, 0, 1.0f); ;
         }
 
         public void Destroy()
         {
-            _soundPoolStandingBy.Release();
-            _soundPoolWaiting.Release();
-            _soundPoolComplete.Release();
+            StopAllSound();
         }
     }
 }

@@ -39,7 +39,6 @@ namespace DeltaGearApp
             intent.PutExtra(RecognizerIntent.ExtraSpeechInputPossiblyCompleteSilenceLengthMillis, 100); // 入力後に待つ時間
             intent.PutExtra(RecognizerIntent.ExtraSpeechInputMinimumLengthMillis, 10000); // 入力の最小時間
             intent.PutExtra(RecognizerIntent.ExtraMaxResults, 5);
-
             intent.PutExtra(RecognizerIntent.ExtraLanguage, Java.Util.Locale.Default);
             StartActivityForResult(intent, 10);
         }
