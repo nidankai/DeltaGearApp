@@ -30,7 +30,7 @@ namespace DeltaGearApp
             _viewCreator.Button.Click += (sender, e) =>
             {
                 Toast.MakeText(this, "Standing by", ToastLength.Short).Show();
-                _deltaSoundPlayer.PlaySound(0);
+                _deltaSoundPlayer.PlayRecognitionedSound();
             };
 
             Intent intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
@@ -81,7 +81,7 @@ namespace DeltaGearApp
             }
 
             Toast.MakeText(this, "Complete", ToastLength.Short).Show();
-            _deltaSoundPlayer.PlaySound(2);
+            _deltaSoundPlayer.PlayCompleteSound();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultVal, Intent data)
@@ -98,7 +98,7 @@ namespace DeltaGearApp
                             if (word == "変身")
                             {
                                 Toast.MakeText(this, "Standing by " + word, ToastLength.Short).Show();
-                                _deltaSoundPlayer.PlaySoundStandingBy();
+                                _deltaSoundPlayer.PlayRecognitionedSound();
                             }
                         }
                     }
